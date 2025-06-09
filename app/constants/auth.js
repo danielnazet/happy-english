@@ -11,6 +11,15 @@ export const TEST_ACCOUNTS = {
 			{ id: 3, name: "Carol Brown", level: "B2" },
 		],
 	},
+	parent: {
+		email: "parent@test.com",
+		password: "parent123",
+		role: "parent",
+		name: "Anna Nowak",
+		children: [
+			{ id: 1, name: "Jan Nowak", class: "3A", level: "A2" },
+		],
+	},
 };
 
 export const validateCredentials = (email, password) => {

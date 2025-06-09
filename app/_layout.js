@@ -16,8 +16,12 @@ const useProtectedRoute = () => {
 			// Przekieruj do logowania jeśli nie jest zalogowany
 			router.replace("/(auth)/login");
 		} else if (user && inAuthGroup) {
-			// Przekieruj do głównej aplikacji jeśli jest zalogowany
-			router.replace("/(tabs)/dashboard");
+			// Przekieruj do odpowiedniego dashboardu w zależności od roli
+			if (user.role === "teacher") {
+				router.replace("/(tabs)/dashboard");
+			} else if (user.role === "parent") {
+				router.replace("/(tabs)/parent-dashboard");
+			}
 		}
 	}, [user, segments]);
 
@@ -42,7 +46,11 @@ function RootLayoutNav() {
 		if (!user && !inAuthGroup) {
 			router.replace("/(auth)/login");
 		} else if (user && inAuthGroup) {
-			router.replace("/(tabs)/dashboard");
+			if (user.role === "teacher") {
+				router.replace("/(tabs)/dashboard");
+			} else if (user.role === "parent") {
+				router.replace("/(tabs)/parent-dashboard");
+			}
 		}
 	}, [user, segments, isReady]);
 

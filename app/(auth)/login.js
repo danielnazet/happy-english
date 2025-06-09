@@ -1,31 +1,44 @@
 import { useState } from "react";
 import {
-	Alert,
-	StyleSheet,
-	Text,
-	TextInput,
-	TouchableOpacity,
-	View,
+    ActivityIndicator,
+    Alert,
+    StyleSheet,
+    Text,
+    TextInput,
+    TouchableOpacity,
+    View,
 } from "react-native";
 import { useAuth } from "../context/auth";
 
 export default function LoginScreen() {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
+	const [isLoading, setIsLoading] = useState(false);
 	const { login } = useAuth();
 
-	const handleLogin = () => {
-		if (login(email, password)) {
-			// Logowanie udane - przekierowanie obsługiwane przez RootLayout
-		} else {
-			Alert.alert("Błąd", "Nieprawidłowy email lub hasło");
+	const handleLogin = async () => {
+		if (!email || !password) {
+			Alert.alert("Błąd", "Proszę wypełnić wszystkie pola");
+			return;
+		}
+
+		setIsLoading(true);
+		try {
+			const success = await login(email, password);
+			if (!success) {
+				Alert.alert("Błąd", "Nieprawidłowy email lub hasło");
+			}
+		} catch (error) {
+			Alert.alert("Błąd", "Wystąpił problem podczas logowania");
+		} finally {
+			setIsLoading(false);
 		}
 	};
 
 	return (
 		<View style={styles.container}>
 			<Text style={styles.title}>Happy English</Text>
-			<Text style={styles.subtitle}>Panel nauczyciela</Text>
+			<Text style={styles.subtitle}>Zaloguj się do swojego konta</Text>
 
 			<View style={styles.form}>
 				<TextInput
@@ -35,6 +48,7 @@ export default function LoginScreen() {
 					onChangeText={setEmail}
 					autoCapitalize="none"
 					keyboardType="email-address"
+					editable={!isLoading}
 				/>
 				<TextInput
 					style={styles.input}
@@ -42,18 +56,37 @@ export default function LoginScreen() {
 					value={password}
 					onChangeText={setPassword}
 					secureTextEntry
+					editable={!isLoading}
 				/>
-				<TouchableOpacity style={styles.button} onPress={handleLogin}>
-					<Text style={styles.buttonText}>Zaloguj się</Text>
+				<TouchableOpacity
+					style={[styles.button, isLoading && styles.buttonDisabled]}
+					onPress={handleLogin}
+					disabled={isLoading}
+				>
+					{isLoading ? (
+						<ActivityIndicator color="#fff" />
+					) : (
+						<Text style={styles.buttonText}>Zaloguj się</Text>
+					)}
 				</TouchableOpacity>
 			</View>
 
-			<View style={styles.testAccount}>
-				<Text style={styles.testAccountTitle}>Konto testowe:</Text>
-				<Text style={styles.testAccountText}>
-					Email: teacher@test.com
-				</Text>
-				<Text style={styles.testAccountText}>Hasło: teacher123</Text>
+			<View style={styles.testAccounts}>
+				<Text style={styles.testAccountTitle}>Konta testowe:</Text>
+				<View style={styles.testAccountSection}>
+					<Text style={styles.testAccountRole}>Nauczyciel:</Text>
+					<Text style={styles.testAccountText}>
+						Email: teacher@test.com
+					</Text>
+					<Text style={styles.testAccountText}>Hasło: teacher123</Text>
+				</View>
+				<View style={styles.testAccountSection}>
+					<Text style={styles.testAccountRole}>Rodzic:</Text>
+					<Text style={styles.testAccountText}>
+						Email: parent@test.com
+					</Text>
+					<Text style={styles.testAccountText}>Hasło: parent123</Text>
+				</View>
 			</View>
 		</View>
 	);
@@ -95,12 +128,15 @@ const styles = StyleSheet.create({
 		borderRadius: 10,
 		alignItems: "center",
 	},
+	buttonDisabled: {
+		opacity: 0.7,
+	},
 	buttonText: {
 		color: "#fff",
 		fontSize: 16,
 		fontWeight: "bold",
 	},
-	testAccount: {
+	testAccounts: {
 		marginTop: 40,
 		padding: 15,
 		backgroundColor: "#F5F5F5",
@@ -109,11 +145,20 @@ const styles = StyleSheet.create({
 	testAccountTitle: {
 		fontSize: 16,
 		fontWeight: "bold",
-		marginBottom: 10,
+		marginBottom: 15,
+	},
+	testAccountSection: {
+		marginBottom: 15,
+	},
+	testAccountRole: {
+		fontSize: 14,
+		fontWeight: "600",
+		color: "#007AFF",
+		marginBottom: 5,
 	},
 	testAccountText: {
 		fontSize: 14,
 		color: "#666",
-		marginBottom: 5,
+		marginBottom: 3,
 	},
 });

@@ -1,7 +1,11 @@
 import { Ionicons } from "@expo/vector-icons";
 import { Tabs } from "expo-router";
+import { useAuth } from "../context/auth";
 
 export default function TabsLayout() {
+	const { user } = useAuth();
+	const isTeacher = user?.role === "teacher";
+
 	return (
 		<Tabs
 			screenOptions={{
@@ -21,6 +25,17 @@ export default function TabsLayout() {
 					tabBarIcon: ({ color, size }) => (
 						<Ionicons name="home" size={size} color={color} />
 					),
+					href: isTeacher ? undefined : null,
+				}}
+			/>
+			<Tabs.Screen
+				name="parent-dashboard"
+				options={{
+					title: "Home",
+					tabBarIcon: ({ color, size }) => (
+						<Ionicons name="home" size={size} color={color} />
+					),
+					href: !isTeacher ? undefined : null,
 				}}
 			/>
 			<Tabs.Screen
@@ -53,7 +68,7 @@ export default function TabsLayout() {
 			<Tabs.Screen
 				name="absence"
 				options={{
-					href: null,
+					href: isTeacher ? undefined : null,
 				}}
 			/>
 		</Tabs>
