@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Happy English - Aplikacja dla Nauczycieli Języka Angielskiego
 
 ## Opis Projektu
@@ -121,3 +122,7 @@ app/
 ## Licencja
 
 MIT License
+=======
+# happy-english
+Happy English to aplikacja mobilna dla nauczycieli języka angielskiego, umożliwiająca zarządzanie lekcjami, zadaniami domowymi, feedbackiem i nieobecnościami uczniów.
+>>>>>>> 44f39a5d5766dbcd34c7553103260e614117d38a
