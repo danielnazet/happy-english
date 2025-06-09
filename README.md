@@ -1,50 +1,123 @@
-# Welcome to your Expo app 👋
+# Happy English - Aplikacja dla Nauczycieli Języka Angielskiego
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+## Opis Projektu
 
-## Get started
+Happy English to aplikacja mobilna dla nauczycieli języka angielskiego, umożliwiająca zarządzanie lekcjami, zadaniami domowymi, feedbackiem i nieobecnościami uczniów.
 
-1. Install dependencies
+## Funkcjonalności Zaimplementowane
 
-   ```bash
-   npm install
-   ```
+-   ✅ System autoryzacji z kontem testowym nauczyciela
+-   ✅ Dashboard z nadchodzącymi lekcjami
+-   ✅ System zgłaszania nieobecności
+-   ✅ Zakładki nawigacyjne (Home, Homework, Feedback, Profile)
+-   ✅ Responsywny interfejs użytkownika
 
-2. Start the app
+## Konto Testowe
 
-   ```bash
-   npx expo start
-   ```
-
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
+```
+Email: teacher@test.com
+Hasło: teacher123
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+## Struktura Projektu
 
-## Learn more
+```
+app/
+├── _layout.js              # Główny layout aplikacji
+├── constants/
+│   └── auth.js            # Dane testowe i walidacja logowania
+├── context/
+│   └── auth.js            # Kontekst autoryzacji
+├── (auth)/
+│   ├── _layout.js         # Layout grupy autoryzacji
+│   └── login.js           # Ekran logowania
+└── (tabs)/
+    ├── _layout.js         # Layout zakładek
+    ├── dashboard.js       # Ekran główny
+    ├── homework.js        # Zarządzanie zadaniami
+    ├── feedback.js        # Opinie nauczyciela
+    ├── profile.js         # Profil użytkownika
+    └── absence.js         # Zgłaszanie nieobecności
+```
 
-To learn more about developing your project with Expo, look at the following resources:
+## Technologie
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+-   React Native
+-   Expo
+-   Expo Router
+-   React Navigation
+-   Expo Vector Icons
 
-## Join the community
+## Do Zrobienia
 
-Join our community of developers creating universal apps.
+### Priorytet Wysoki
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+-   [ ] Implementacja systemu zarządzania zadaniami domowymi
+-   [ ] System oceniania i feedbacku dla uczniów
+-   [ ] Profil nauczyciela z możliwością edycji danych
+-   [ ] System powiadomień o nowych zadaniach/feedbacku
+
+### Priorytet Średni
+
+-   [ ] Kalendarz lekcji
+-   [ ] Statystyki postępów uczniów
+-   [ ] System wiadomości między nauczycielem a rodzicami
+-   [ ] Eksport danych do PDF/Excel
+
+### Priorytet Niski
+
+-   [ ] Tryb ciemny
+-   [ ] Wsparcie dla wielu języków
+-   [ ] System backupu danych
+-   [ ] Integracja z kalendarzem systemowym
+
+## Jak Uruchomić Projekt
+
+1. Sklonuj repozytorium
+2. Zainstaluj zależności:
+    ```bash
+    npm install
+    ```
+3. Uruchom aplikację:
+    ```bash
+    npm start
+    ```
+4. Użyj Expo Go na urządzeniu mobilnym lub emulatorze
+
+## Planowane Zmiany
+
+1. Dodanie systemu zarządzania zadaniami:
+
+    - Tworzenie nowych zadań
+    - Przypisywanie zadań do klas/grup
+    - Śledzenie terminów oddania
+    - Ocenianie zadań
+
+2. Rozbudowa systemu feedbacku:
+
+    - Szablony opinii
+    - Historia feedbacku
+    - Powiadomienia o nowych opiniach
+
+3. Ulepszenie profilu nauczyciela:
+
+    - Edycja danych osobowych
+    - Zarządzanie przedmiotami
+    - Statystyki aktywności
+
+4. Optymalizacja UI/UX:
+    - Dodanie animacji
+    - Ulepszenie responsywności
+    - Dodanie wskaźników ładowania
+
+## Kontrybucja
+
+1. Fork repozytorium
+2. Stwórz branch dla nowej funkcjonalności
+3. Commit zmian
+4. Push do brancha
+5. Stwórz Pull Request
+
+## Licencja
+
+MIT License
